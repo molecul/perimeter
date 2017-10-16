@@ -1,0 +1,39 @@
+{{ define "footer" }}
+    </div>
+</div>
+
+{{ if .menu }}
+<div class="fixed-action-btn" style="bottom: 24px; right: 24px;">
+    <a class="btn-floating btn-large grey darken-2">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>{{ range .menu }}
+        <li>
+            <a class="btn-floating{{ if .ToolTip }} tooltipped{{ end }}{{ if .Color }} {{ .Color }}{{ end }}" style="transform: scaleY(0.4) scaleX(0.4) translateY(40px) translateX(0px); opacity: 0;"{{ if .ToolTip }} data-position="left" data-delay="50" data-tooltip="{{ .ToolTip }}"{{ end }}{{ if .Attributes }} {{ .Attributes | attr }}{{ end }}>
+                <i class="material-icons">{{ .Icon }}</i>
+            </a>
+        </li>{{ end }}
+    </ul>
+</div>
+{{ end }}
+
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="/static/js/jquery-3.2.1.min.js"></script>
+
+<!-- Compiled and minified JavaScript -->
+<script src="/static/js/materialize.min.js"></script>
+
+<!-- Perimeter Core JS -->
+<script src="/static/js/perimeter.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('input.counter, textarea.counter').characterCounter();
+        $('select').material_select();
+        $('.modal').modal();
+        {{ if .stream }}initSSE('{{ .stream }}');{{ end }}
+    });
+</script>
+</body>
+</html>
+{{ end }}
