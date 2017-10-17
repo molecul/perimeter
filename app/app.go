@@ -2,27 +2,23 @@ package perimeter
 
 import (
 	"fmt"
+	"html/template"
 
 	"github.com/gin-gonic/gin"
-
-	"v0rt3x/perimeter/config"
-	"v0rt3x/perimeter/consul"
-
-	"v0rt3x/perimeter/web/api"
-	"v0rt3x/perimeter/web/ui"
-	"v0rt3x/perimeter/web/ws"
-
-	"html/template"
+	"github.com/v0rt3x/perimeter/config"
+	"github.com/v0rt3x/perimeter/consul"
+	"github.com/v0rt3x/perimeter/web/api"
+	"github.com/v0rt3x/perimeter/web/ui"
+	"github.com/v0rt3x/perimeter/web/ws"
 )
 
 func Run(c *config.PerimeterConfig) {
-
 	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
 
 	router.Static("/static", "static")
 	router.SetFuncMap(template.FuncMap{
-		"attr":func(s string) template.HTMLAttr{
+		"attr": func(s string) template.HTMLAttr {
 			return template.HTMLAttr(s)
 		},
 		"safe": func(s string) template.HTML {
@@ -52,7 +48,7 @@ func Run(c *config.PerimeterConfig) {
 		panic(err)
 	}
 
-	client.RegisterService(c.Perimeter.Server.Port, "perimeter-server", "perimeter-server", []string { "perimeter", "master" })
+	client.RegisterService(c.Perimeter.Server.Port, "perimeter-server", "perimeter-server", []string{"perimeter", "master"})
 
 	client.GetAgents()
 	defer client.UnRegisterService("perimeter-server")

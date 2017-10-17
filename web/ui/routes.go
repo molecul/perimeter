@@ -50,10 +50,10 @@ var links = web.Links{
 	},
 }
 
-func GetRoutes () web.Routes {
+func GetRoutes() web.Routes {
 	return routes
 }
 
-func GetLinks () web.Links {
+func GetLinks() web.Links {
 	return links
 }

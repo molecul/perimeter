@@ -1,8 +1,8 @@
 package consul
 
 import (
-	"github.com/hashicorp/consul/api"
 	"fmt"
+	"github.com/hashicorp/consul/api"
 )
 
 type Client struct {
@@ -20,12 +20,12 @@ func NewClient(addr string) (*Client, error) {
 		return nil, err
 	}
 
-	return &Client{ consul: client }, nil
+	return &Client{consul: client}, nil
 }
 
 func (c *Client) RegisterService(port int, id string, name string, tags []string) error {
 	return c.consul.Agent().ServiceRegister(&api.AgentServiceRegistration{
-		ID: id,
+		ID:   id,
 		Name: name,
 		Port: port,
 		Tags: tags,

@@ -10,6 +10,6 @@ var routes = web.Routes{
 	},
 }
 
-func GetRoutes () web.Routes {
+func GetRoutes() web.Routes {
 	return routes
 }
